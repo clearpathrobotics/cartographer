@@ -186,6 +186,10 @@ set(INSTALL_GENERATED_HDRS ${ALL_PROTO_HDRS} ${ALL_GRPC_SERVICE_HDRS})
 
 add_library(${PROJECT_NAME} STATIC ${ALL_LIBRARY_HDRS} ${ALL_LIBRARY_SRCS})
 
+#if(${EIGEN3_VERSION} VERSION_GREATER_EQUAL "3.3" AND ${EIGEN3_VERSION} VERSION_LESS "3.4")
+  target_compile_definitions(${PROJECT_NAME} PUBLIC EIGEN_MAX_ALIGN_BYTES=16)
+#endif()
+
 configure_file(
   ${PROJECT_SOURCE_DIR}/cartographer/common/config.h.cmake
   ${PROJECT_BINARY_DIR}/cartographer/common/config.h)
